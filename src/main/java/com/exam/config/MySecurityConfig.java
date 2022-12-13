@@ -31,13 +31,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     @Override

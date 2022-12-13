@@ -1,5 +1,7 @@
 package com.exam.service.impl;
 
+import com.exam.helper.UserFoundException;
+import com.exam.helper.UserNotFoundException;
 import com.exam.model.User;
 import com.exam.model.UserRole;
 import com.exam.repository.RoleRepository;
@@ -23,9 +25,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
         User local = this.userRepository.findByUsername(user.getUsername());
-        if(local!=null){
+        if(local!=null) {
             System.out.println("User already exists");
-            throw new Exception("User already present");
+//                throw new Exception("User already present");
+            throw new UserFoundException();
         }
         else{
 //    create user
@@ -43,7 +46,8 @@ public class UserServiceImpl implements UserService {
         User local = this.userRepository.findByUsername(username);
         if(local==null){
             System.out.println("no such user");
-            throw new Exception("no such user present");
+//            throw new Exception("no such user present");
+            throw new UserNotFoundException();
         }
         return local;
     }
